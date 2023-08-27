@@ -12,7 +12,6 @@
       overflow: hidden;
       background-color: #1a1a1a;
       color: #fff;
-      transition: color 0.5s ease; /* Added transition for smooth color change */
     }
     #animationContainer {
       position: fixed;
@@ -40,7 +39,6 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
-      width: 200px; /* Make all buttons the same width */
     }
     button:hover {
       background-color: #2980b9;
@@ -79,6 +77,7 @@
   <p id="ipAddress"></p>
   <p id="location"></p>
   <p id="timezone"></p>
+  <p id="browserInfo"></p>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
