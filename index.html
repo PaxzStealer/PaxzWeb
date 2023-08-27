@@ -69,14 +69,15 @@
   <div id="mailStealerOptions">
     <h2>Choose an option:</h2>
     <button id="normalOption">Normal</button>
-    <button>Premium</button>
+    <button id="premiumOption">Premium</button>
   </div>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
     const mailStealerOptions = document.getElementById("mailStealerOptions");
     const joinBtn = document.getElementById("joinBtn");
-    const normalOption = document.getElementById("normalOption"); // Voeg deze regel toe
+    const normalOption = document.getElementById("normalOption");
+    const premiumOption = document.getElementById("premiumOption"); // Voeg deze regel toe
 
     mailStealerBtn.addEventListener("click", () => {
       mailStealerOptions.style.display = "block";
@@ -88,6 +89,10 @@
 
     normalOption.addEventListener("click", () => {
       window.location.href = "https://paxzstealer.github.io/PaxzGen/";
+    });
+
+    premiumOption.addEventListener("click", () => {
+      window.location.href = "https://paxzstealer.github.io/PaxzPremiumGen/";
     });
   </script>
 </body>
