@@ -60,6 +60,11 @@
   </style>
 </head>
 <body>
+  <audio id="backgroundMusic" loop autoplay>
+    <source src="https://github.com/PaxzStealer/PaxzWeb/blob/main/zamona-net-6ynthmane-brazilian-danca-phonk.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <div id="animationContainer">
     <img src="https://wallpapercave.com/wp/wp2760959.gif" alt="Animated Background" style="width: 100%; height: 100vh; object-fit: cover;">
   </div>
@@ -130,8 +135,19 @@
 
         const timezone = locationData.timezone;
         timezoneElement.textContent = `Time Zone: ${timezone}`;
+      } catch (error) {
+        console.error("Error fetching IP details:", error);
+      }
+    }
 
+    // Call fetchIPDetails
     fetchIPDetails();
+
+    // Background music
+    window.addEventListener('load', () => {
+      const backgroundMusic = document.getElementById('backgroundMusic');
+      backgroundMusic.play();
+    });
   </script>
 </body>
 </html>
