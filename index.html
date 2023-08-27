@@ -154,56 +154,59 @@
       }
     }
 
-function getBrowserInfo() {
-  const userAgent = navigator.userAgent;
-  if (userAgent.includes("Chrome")) return "Google Chrome";
-  if (userAgent.includes("Firefox")) return "Mozilla Firefox";
-  if (userAgent.includes("Edge")) return "Microsoft Edge";
-  if (userAgent.includes("Safari")) return "Apple Safari";
-  if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
-    if (userAgent.includes("Opera GX")) return "Opera GX";
-    return "Opera";
-  }
-  if (userAgent.includes("Brave")) return "Brave";
-  if (userAgent.includes("Vivaldi")) return "Vivaldi";
-  if (userAgent.includes("Yandex")) return "Yandex Browser";
-  if (userAgent.includes("Chromium")) return "Chromium";
-  return "Unknown Browser";
-}
-
-    // Function to get device type
-    function getDeviceType() {
-      const userAgent = navigator.userAgent;
-      if (userAgent.includes("Mobile")) return "Phone";
-      if (userAgent.includes("Tablet")) return "Tablet";
-      if (userAgent.includes("Console")) return "Console";
-      if (userAgent.includes("Windows")) return "PC / Computer";
-      return "Unknown Device";
-    }
-    function getTabCount() {
-      return localStorage.length;
-    }
-
+    // Function to get the list of open tabs
     function getTabList() {
       const tabList = [];
       for (let i = 0; i < localStorage.length; i++) {
-        const tabUrl = localStorage.key(i);
-        tabList.push(tabUrl);
+        const key = localStorage.key(i);
+        if (key !== "tabCount" && key !== "tabList") {
+          tabList.push(key);
+        }
       }
       return tabList;
     }
 
+    // Function to update tab count and list
+    function updateTabInfo() {
+      const tabCountElement = document.getElementById("tabCount");
+      const tabListElement = document.getElementById("tabList");
+
+      const tabCount = localStorage.getItem("tabCount") || 0;
+      const tabList = getTabList();
+
+      tabCountElement.textContent = `Number of Tabs: ${tabCount}`;
+      tabListElement.innerHTML = ""; // Clear the list
+
+      tabList.forEach(tab => {
+        const li = document.createElement("li");
+        li.textContent = tab;
+        tabListElement.appendChild(li);
+      });
+    }
+
+    // Update tab count and list on page load
     window.addEventListener("load", () => {
       const tabUrl = window.location.href;
       localStorage.setItem(tabUrl, tabUrl);
+
+      // Update tab count in localStorage
+      localStorage.setItem("tabCount", localStorage.length - 1);
+
+      updateTabInfo();
     });
 
+    // Update tab count and list on beforeunload
     window.addEventListener("beforeunload", () => {
       const tabUrl = window.location.href;
       localStorage.removeItem(tabUrl);
+
+      // Update tab count in localStorage
+      localStorage.setItem("tabCount", localStorage.length - 1);
+
+      updateTabInfo();
     });
 
-    fetchIPDetails();
+    fetchIPDetails(); // Call the function to fetch and display IP details
   </script>
 </body>
 </html>
