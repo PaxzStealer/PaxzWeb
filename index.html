@@ -12,6 +12,7 @@
       overflow: hidden;
       background-color: #1a1a1a;
       color: #fff;
+      transition: color 0.5s ease; /* Added transition for smooth color change */
     }
     #animationContainer {
       position: fixed;
@@ -39,6 +40,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
+      width: 200px; /* Make all buttons the same width */
     }
     button:hover {
       background-color: #2980b9;
@@ -77,10 +79,6 @@
   <p id="ipAddress"></p>
   <p id="location"></p>
   <p id="timezone"></p>
-  <p id="browserInfo"></p>
-  <p id="deviceInfo"></p>
-  <p id="tabCount"></p>
-  <ul id="tabList"></ul>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
@@ -133,49 +131,6 @@
 
         const timezone = locationData.timezone;
         timezoneElement.textContent = `Time Zone: ${timezone}`;
-
-        const browserInfo = getBrowserInfo();
-        browserInfoElement.textContent = `Browser: ${browserInfo}`;
-
-        const deviceType = getDeviceType();
-        deviceInfoElement.textContent = `Device: ${deviceType}`;
-
-        const tabCount = getTabCount();
-        const tabList = getTabList();
-
-        tabCountElement.textContent = `Number of Tabs: ${tabCount}`;
-        tabList.forEach(tab => {
-          const li = document.createElement("li");
-          li.textContent = tab;
-          tabListElement.appendChild(li);
-        });
-      } catch (error) {
-        console.error("Error fetching IP details:", error);
-      }
-    }
-
-    function getTabCount() {
-      return localStorage.length;
-    }
-
-    function getTabList() {
-      const tabList = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const tabUrl = localStorage.key(i);
-        tabList.push(tabUrl);
-      }
-      return tabList;
-    }
-
-    window.addEventListener("load", () => {
-      const tabUrl = window.location.href;
-      localStorage.setItem(tabUrl, tabUrl);
-    });
-
-    window.addEventListener("beforeunload", () => {
-      const tabUrl = window.location.href;
-      localStorage.removeItem(tabUrl);
-    });
 
     fetchIPDetails();
   </script>
