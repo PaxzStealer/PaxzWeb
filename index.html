@@ -54,24 +54,6 @@
     #mailStealerOptions button:hover {
       background-color: #c0392b;
     }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    .modal-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
   </style>
 </head>
 <body>
@@ -84,22 +66,18 @@
   <button id="joinBtn">Join Paxz</button>
   <button id="otherScriptsBtn">Other Scripts</button>
 
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h2>Choose an option:</h2>
-      <button id="normalOption">Normal</button>
-      <button id="premiumOption">Premium</button>
-    </div>
+  <div id="mailStealerOptions">
+    <h2>Choose an option:</h2>
+    <button id="normalOption">Normal</button>
+    <button id="premiumOption">Premium</button>
   </div>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
     const mailStealerOptions = document.getElementById("mailStealerOptions");
     const joinBtn = document.getElementById("joinBtn");
-    const modal = document.getElementById("modal");
     const normalOption = document.getElementById("normalOption");
-    const premiumOption = document.getElementById("premiumOption");
+    const premiumOption = document.getElementById("premiumOption"); // Voeg deze regel toe
 
     mailStealerBtn.addEventListener("click", () => {
       mailStealerOptions.style.display = "block";
