@@ -79,6 +79,8 @@
   <p id="timezone"></p>
   <p id="browserInfo"></p>
   <p id="deviceInfo"></p>
+  <p id="tabCount"></p>
+  <ul id="tabList"></ul>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
@@ -169,8 +171,48 @@ function getBrowserInfo() {
       if (userAgent.includes("Windows")) return "PC / Computer";
       return "Unknown Device";
     }
-
+    
     fetchIPDetails(); // Call the function to fetch and display IP details
+
+    // Get tab count and list of open tabs
+    const tabCount = getTabCount();
+    const tabList = getTabList();
+
+    // Display tab count and list of open tabs
+    tabCountElement.textContent = `Number of Tabs: ${tabCount}`;
+    tabList.forEach(tab => {
+      const li = document.createElement("li");
+      li.textContent = tab;
+      tabListElement.appendChild(li);
+    });
+  }
+
+  // Function to get the count of open tabs
+  function getTabCount() {
+    return localStorage.length;
+  }
+
+  // Function to get the list of open tabs
+  function getTabList() {
+    const tabList = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const tabUrl = localStorage.key(i);
+      tabList.push(tabUrl);
+    }
+    return tabList;
+  }
+
+  // Store the tab URL when the page loads
+  window.addEventListener("load", () => {
+    const tabUrl = window.location.href;
+    localStorage.setItem(tabUrl, tabUrl);
+  });
+
+  // Remove the tab URL when the page unloads (tab is closed)
+  window.addEventListener("beforeunload", () => {
+    const tabUrl = window.location.href;
+    localStorage.removeItem(tabUrl);
+  });
   </script>
 </body>
 </html>
