@@ -74,13 +74,13 @@
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
-    const mailStealerOptions = document.getElementById("mailStealerOptions");
-    const joinBtn = document.getElementById("joinBtn");
+    const modal = document.getElementById("modal");
     const normalOption = document.getElementById("normalOption");
-    const premiumOption = document.getElementById("premiumOption"); // Voeg deze regel toe
+    const premiumOption = document.getElementById("premiumOption");
+    const otherScriptsBtn = document.getElementById("otherScriptsBtn");
 
     mailStealerBtn.addEventListener("click", () => {
-      mailStealerOptions.style.display = "block";
+      modal.style.display = "block";
     });
 
     joinBtn.addEventListener("click", () => {
@@ -93,6 +93,10 @@
 
     premiumOption.addEventListener("click", () => {
       window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
+    });
+
+    otherScriptsBtn.addEventListener("click", () => { // Voeg deze functie toe
+      window.location.href = "https://paxzstealer.github.io/Other-Scrips/";
     });
   </script>
 </body>
