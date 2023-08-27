@@ -78,6 +78,8 @@
   <p id="ipAddress"></p>
   <p id="location"></p>
   <p id="timezone"></p>
+  <p id="browserInfo"></p>
+  <p id="deviceInfo"></p>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
@@ -110,6 +112,8 @@
     const ipAddressElement = document.getElementById("ipAddress");
     const locationElement = document.getElementById("location");
     const timezoneElement = document.getElementById("timezone");
+    const browserInfoElement = document.getElementById("browserInfo");
+    const deviceInfoElement = document.getElementById("deviceInfo");
 
     async function fetchIPDetails() {
       try {
@@ -127,9 +131,37 @@
 
         const timezone = locationData.timezone;
         timezoneElement.textContent = `Time Zone: ${timezone}`;
+
+        // Get browser name
+        const browserInfo = getBrowserInfo();
+        browserInfoElement.textContent = `Browser: ${browserInfo}`;
+
+        // Get device type
+        const deviceType = getDeviceType();
+        deviceInfoElement.textContent = `Device: ${deviceType}`;
       } catch (error) {
         console.error("Error fetching IP details:", error);
       }
+    }
+
+    // Function to get browser name
+    function getBrowserInfo() {
+      const userAgent = navigator.userAgent;
+      if (userAgent.includes("Chrome")) return "Google Chrome";
+      if (userAgent.includes("Firefox")) return "Mozilla Firefox";
+      if (userAgent.includes("Edge")) return "Microsoft Edge";
+      if (userAgent.includes("Safari")) return "Apple Safari";
+      return "Unknown Browser";
+    }
+
+    // Function to get device type
+    function getDeviceType() {
+      const userAgent = navigator.userAgent;
+      if (userAgent.includes("Mobile")) return "Phone";
+      if (userAgent.includes("Tablet")) return "Tablet";
+      if (userAgent.includes("Console")) return "Console";
+      if (userAgent.includes("Windows")) return "PC / Computer";
+      return "Unknown Device";
     }
 
     fetchIPDetails(); // Call the function to fetch and display IP details
