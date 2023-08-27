@@ -87,71 +87,70 @@
   <button id="startMusicBtn">Start Music</button>
 
   <script>
-    const mailStealerBtn = document.getElementById("mailStealerBtn");
-    const mailStealerOptions = document.getElementById("mailStealerOptions");
-    const normalOption = document.getElementById("normalOption");
-    const premiumOption = document.getElementById("premiumOption");
-    const otherScriptsBtn = document.getElementById("otherScriptsBtn");
-    const startMusicBtn = document.getElementById("startMusicBtn"); // Add this line
+  const mailStealerBtn = document.getElementById("mailStealerBtn");
+  const mailStealerOptions = document.getElementById("mailStealerOptions");
+  const normalOption = document.getElementById("normalOption");
+  const premiumOption = document.getElementById("premiumOption");
+  const otherScriptsBtn = document.getElementById("otherScriptsBtn");
+  const startMusicBtn = document.getElementById("startMusicBtn");
 
-    mailStealerBtn.addEventListener("click", () => {
-      mailStealerOptions.classList.toggle("show");
-    });
+  mailStealerBtn.addEventListener("click", () => {
+    mailStealerOptions.classList.toggle("show");
+  });
 
-    joinBtn.addEventListener("click", () => {
-      window.location.href = "https://discord.gg/jw6xSeNfBs";
-    });
+  joinBtn.addEventListener("click", () => {
+    window.location.href = "https://discord.gg/jw6xSeNfBs";
+  });
 
-    normalOption.addEventListener("click", () => {
-      window.location.href = "https://paxzstealer.github.io/PaxzGen/";
-    });
+  normalOption.addEventListener("click", () => {
+    window.location.href = "https://paxzstealer.github.io/PaxzGen/";
+  });
 
-    premiumOption.addEventListener("click", () => {
-      window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
-    });
+  premiumOption.addEventListener("click", () => {
+    window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
+  });
 
-    otherScriptsBtn.addEventListener("click", () => {
-      window.location.href = "https://paxzstealer.github.io/Other-Scrips/";
-    });
+  otherScriptsBtn.addEventListener("click", () => {
+    window.location.href = "https://paxzstealer.github.io/Other-Scrips/";
+  });
 
-    const ipAddressElement = document.getElementById("ipAddress");
-    const locationElement = document.getElementById("location");
-    const timezoneElement = document.getElementById("timezone");
-    const browserInfoElement = document.getElementById("browserInfo");
-    const deviceInfoElement = document.getElementById("deviceInfo");
-    const tabCountElement = document.getElementById("tabCount");
-    const tabListElement = document.getElementById("tabList");
+  const ipAddressElement = document.getElementById("ipAddress");
+  const locationElement = document.getElementById("location");
+  const timezoneElement = document.getElementById("timezone");
+  const browserInfoElement = document.getElementById("browserInfo");
+  const deviceInfoElement = document.getElementById("deviceInfo");
+  const tabCountElement = document.getElementById("tabCount");
+  const tabListElement = document.getElementById("tabList");
 
-    async function fetchIPDetails() {
-      try {
-        const ipResponse = await fetch("https://api.ipify.org?format=json");
-        const ipData = await ipResponse.json();
-        const ipAddress = ipData.ip;
-        ipAddressElement.textContent = `Your IP Address: ${ipAddress}`;
+  async function fetchIPDetails() {
+    try {
+      const ipResponse = await fetch("https://api.ipify.org?format=json");
+      const ipData = await ipResponse.json();
+      const ipAddress = ipData.ip;
+      ipAddressElement.textContent = `Your IP Address: ${ipAddress}`;
 
-        const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
-        const locationData = await locationResponse.json();
-        const country = locationData.country_name;
-        const region = locationData.region;
-        const city = locationData.city;
-        locationElement.textContent = `Location: ${city}, ${region}, ${country}`;
+      const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+      const locationData = await locationResponse.json();
+      const country = locationData.country_name;
+      const region = locationData.region;
+      const city = locationData.city;
+      locationElement.textContent = `Location: ${city}, ${region}, ${country}`;
 
-        const timezone = locationData.timezone;
-        timezoneElement.textContent = `Time Zone: ${timezone}`;
-      } catch (error) {
-        console.error("Error fetching IP details:", error);
-      }
+      const timezone = locationData.timezone;
+      timezoneElement.textContent = `Time Zone: ${timezone}`;
+    } catch (error) {
+      console.error("Error fetching IP details:", error);
     }
+  }
 
-    // Call fetchIPDetails
-    fetchIPDetails();
+  // Call fetchIPDetails
+  fetchIPDetails();
 
-    // Background music
-    startMusicBtn.addEventListener("click", () => {
-      const backgroundMusic = document.getElementById("backgroundMusic");
-      backgroundMusic.play();
-      startMusicBtn.style.display = "none";
-    });
-  </script>
-</body>
-</html>
+  // Background music
+  const backgroundMusic = document.getElementById("backgroundMusic");
+
+  startMusicBtn.addEventListener("click", () => {
+    backgroundMusic.play();
+    startMusicBtn.style.display = "none";
+  });
+</script>
