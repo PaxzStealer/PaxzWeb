@@ -85,19 +85,17 @@
     <button id="premiumOption">Premium</button>
   </div>
 
+  <div id="visitCounts" class="visit-count">Site visited: <span id="totalVisits">0</span> times</div>
+  <div id="ipInfo">Your IP: <span id="userIP">Loading...</span></div>
+
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
     const mailStealerOptions = document.getElementById("mailStealerOptions");
     const normalOption = document.getElementById("normalOption");
     const premiumOption = document.getElementById("premiumOption");
     const otherScriptsBtn = document.getElementById("otherScriptsBtn");
-
-    mailStealerBtn.addEventListener("click", () => {
-      mailStealerOptions.classList.toggle("show");
-    });
-
-      <div id="visitCounts" class="visit-count">Site visited: <span id="totalVisits">0</span> times</div>
-  <div id="ipInfo">Your IP: <span id="userIP">Loading...</span></div>
+    const totalVisitsSpan = document.getElementById("totalVisits");
+    const userIPSpan = document.getElementById("userIP");
 
     // Update visit count
     function updateVisitCount() {
@@ -133,19 +131,27 @@
 
     joinBtn.addEventListener("click", () => {
       window.location.href = "https://discord.gg/jw6xSeNfBs";
+      incrementVisitCount();
     });
 
     normalOption.addEventListener("click", () => {
       window.location.href = "https://paxzstealer.github.io/PaxzGen/";
+      incrementVisitCount();
     });
 
     premiumOption.addEventListener("click", () => {
-      window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
+      window.location.href = "https://paxzstealer.github.io/PaxzPremiumGen/";
+      incrementVisitCount();
     });
 
     otherScriptsBtn.addEventListener("click", () => {
       window.location.href = "https://paxzstealer.github.io/Other-Scrips/";
+      incrementVisitCount();
     });
+
+    // Initialize visit count and get user IP on page load
+    updateVisitCount();
+    getUserIP();
   </script>
 </body>
 </html>
