@@ -1,75 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paxz Scripts</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      overflow: hidden;
-      background-color: #1a1a1a;
-      color: #fff;
-    }
-
-    /* Add background music */
-    audio {
-      display: none;
-    }
-
-    /* Adjust canvas styling */
-    #visualizerCanvas {
-      display: block;
-      margin: 20px auto;
-    }
-
-    /* Additional styles */
-    h1 {
-      font-size: 48px;
-      margin-top: 50px;
-    }
-
-    h2 {
-      font-size: 30px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin: 10px;
-      background-color: #3498db;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-
-    #mailStealerOptions {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #mailStealerOptions.show {
-      display: block;
-    }
-
-    #mailStealerOptions button {
-      background-color: #e74c3c;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    #mailStealerOptions button:hover {
-      background-color: #c0392b;
-    }
-  </style>
+</style>
 </head>
 <body>
   <audio id="backgroundMusic" loop autoplay>
@@ -161,11 +90,11 @@
     // Audio Visualizer
     const canvas = document.getElementById("visualizerCanvas");
     const context = canvas.getContext("2d");
-    const analyser = new AnalyserNode(audioContext);
 
     const audio = document.getElementById("backgroundMusic");
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const source = audioContext.createMediaElementSource(audio);
+    const analyser = audioContext.createAnalyser();
 
     source.connect(analyser);
     analyser.connect(audioContext.destination);
