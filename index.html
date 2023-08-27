@@ -57,6 +57,16 @@
     #mailStealerOptions button:hover {
       background-color: #c0392b;
     }
+    .visit-count {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 10px;
+    }
+    #ipInfo {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -84,6 +94,41 @@
 
     mailStealerBtn.addEventListener("click", () => {
       mailStealerOptions.classList.toggle("show");
+    });
+
+      <div id="visitCounts" class="visit-count">Site visited: <span id="totalVisits">0</span> times</div>
+  <div id="ipInfo">Your IP: <span id="userIP">Loading...</span></div>
+
+    // Update visit count
+    function updateVisitCount() {
+      const totalVisits = localStorage.getItem("totalVisits") || 0;
+      totalVisitsSpan.textContent = totalVisits;
+    }
+
+    // Get user IP using AJAX
+    function getUserIP() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://ip-api.com/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const ipData = JSON.parse(xhr.responseText);
+          userIPSpan.textContent = ipData.query;
+        }
+      };
+      xhr.send();
+    }
+
+    // Increment visit count
+    function incrementVisitCount() {
+      let totalVisits = localStorage.getItem("totalVisits") || 0;
+      totalVisits = parseInt(totalVisits) + 1;
+      localStorage.setItem("totalVisits", totalVisits);
+      updateVisitCount();
+    }
+
+    mailStealerBtn.addEventListener("click", () => {
+      mailStealerOptions.classList.toggle("show");
+      incrementVisitCount();
     });
 
     joinBtn.addEventListener("click", () => {
