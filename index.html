@@ -13,22 +13,29 @@
       background-color: #1a1a1a;
       color: #fff;
     }
-    #animationContainer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+
+    /* Add background music */
+    audio {
+      display: none;
     }
+
+    /* Adjust canvas styling */
+    #visualizerCanvas {
+      display: block;
+      margin: 20px auto;
+    }
+
+    /* Additional styles */
     h1 {
       font-size: 48px;
       margin-top: 50px;
     }
+
     h2 {
       font-size: 30px;
       margin-bottom: 20px;
     }
+
     button {
       padding: 10px 20px;
       font-size: 18px;
@@ -40,28 +47,33 @@
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
     }
+
     button:hover {
       background-color: #2980b9;
     }
+
     #mailStealerOptions {
       display: none;
       margin-top: 20px;
     }
+
     #mailStealerOptions.show {
       display: block;
     }
+
     #mailStealerOptions button {
       background-color: #e74c3c;
       transition: background-color 0.3s ease-in-out;
     }
+
     #mailStealerOptions button:hover {
       background-color: #c0392b;
     }
   </style>
 </head>
 <body>
-  <audio id="backgroundMusic" loop>
-    <source src="https://github.com/PaxzStealer/PaxzWeb/blob/main/zamona-net-6ynthmane-brazilian-danca-phonk.mp3" type="audio/mpeg">
+  <audio id="backgroundMusic" loop autoplay>
+    <source src="https://zamona.net/uploads/files/2023-06/1655777603_6ynthmane%20-%20brazilian%20danca.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
@@ -83,74 +95,108 @@
   <p id="location"></p>
   <p id="timezone"></p>
   <p id="browserInfo"></p>
-  <!-- Add the Start Music button -->
-  <button id="startMusicBtn">Start Music</button>
+
+  <!-- Audio Visualizer Canvas -->
+  <canvas id="visualizerCanvas" width="800" height="200"></canvas>
 
   <script>
-  const mailStealerBtn = document.getElementById("mailStealerBtn");
-  const mailStealerOptions = document.getElementById("mailStealerOptions");
-  const normalOption = document.getElementById("normalOption");
-  const premiumOption = document.getElementById("premiumOption");
-  const otherScriptsBtn = document.getElementById("otherScriptsBtn");
-  const startMusicBtn = document.getElementById("startMusicBtn");
+    const mailStealerBtn = document.getElementById("mailStealerBtn");
+    const mailStealerOptions = document.getElementById("mailStealerOptions");
+    const normalOption = document.getElementById("normalOption");
+    const premiumOption = document.getElementById("premiumOption");
+    const otherScriptsBtn = document.getElementById("otherScriptsBtn");
 
-  mailStealerBtn.addEventListener("click", () => {
-    mailStealerOptions.classList.toggle("show");
-  });
+    mailStealerBtn.addEventListener("click", () => {
+      mailStealerOptions.classList.toggle("show");
+    });
 
-  joinBtn.addEventListener("click", () => {
-    window.location.href = "https://discord.gg/jw6xSeNfBs";
-  });
+    joinBtn.addEventListener("click", () => {
+      window.location.href = "https://discord.gg/jw6xSeNfBs";
+    });
 
-  normalOption.addEventListener("click", () => {
-    window.location.href = "https://paxzstealer.github.io/PaxzGen/";
-  });
+    normalOption.addEventListener("click", () => {
+      window.location.href = "https://paxzstealer.github.io/PaxzGen/";
+    });
 
-  premiumOption.addEventListener("click", () => {
-    window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
-  });
+    premiumOption.addEventListener("click", () => {
+      window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
+    });
 
-  otherScriptsBtn.addEventListener("click", () => {
-    window.location.href = "https://paxzstealer.github.io/Other-Scrips/";
-  });
+    otherScriptsBtn.addEventListener("click", () => {
+      window.location.href = "https://paxzstealer.github.io/Other-Scrips/";
+    });
 
-  const ipAddressElement = document.getElementById("ipAddress");
-  const locationElement = document.getElementById("location");
-  const timezoneElement = document.getElementById("timezone");
-  const browserInfoElement = document.getElementById("browserInfo");
-  const deviceInfoElement = document.getElementById("deviceInfo");
-  const tabCountElement = document.getElementById("tabCount");
-  const tabListElement = document.getElementById("tabList");
+    const ipAddressElement = document.getElementById("ipAddress");
+    const locationElement = document.getElementById("location");
+    const timezoneElement = document.getElementById("timezone");
+    const browserInfoElement = document.getElementById("browserInfo");
+    const deviceInfoElement = document.getElementById("deviceInfo");
+    const tabCountElement = document.getElementById("tabCount");
+    const tabListElement = document.getElementById("tabList");
 
-  async function fetchIPDetails() {
-    try {
-      const ipResponse = await fetch("https://api.ipify.org?format=json");
-      const ipData = await ipResponse.json();
-      const ipAddress = ipData.ip;
-      ipAddressElement.textContent = `Your IP Address: ${ipAddress}`;
+    async function fetchIPDetails() {
+      try {
+        const ipResponse = await fetch("https://api.ipify.org?format=json");
+        const ipData = await ipResponse.json();
+        const ipAddress = ipData.ip;
+        ipAddressElement.textContent = `Your IP Address: ${ipAddress}`;
 
-      const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
-      const locationData = await locationResponse.json();
-      const country = locationData.country_name;
-      const region = locationData.region;
-      const city = locationData.city;
-      locationElement.textContent = `Location: ${city}, ${region}, ${country}`;
+        const locationResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+        const locationData = await locationResponse.json();
+        const country = locationData.country_name;
+        const region = locationData.region;
+        const city = locationData.city;
+        locationElement.textContent = `Location: ${city}, ${region}, ${country}`;
 
-      const timezone = locationData.timezone;
-      timezoneElement.textContent = `Time Zone: ${timezone}`;
-    } catch (error) {
-      console.error("Error fetching IP details:", error);
+        const timezone = locationData.timezone;
+        timezoneElement.textContent = `Time Zone: ${timezone}`;
+      } catch (error) {
+        console.error("Error fetching IP details:", error);
+      }
     }
-  }
 
-  // Call fetchIPDetails
-  fetchIPDetails();
+    // Call fetchIPDetails
+    fetchIPDetails();
 
-  // Background music
-  const backgroundMusic = document.getElementById("backgroundMusic");
+    // Audio Visualizer
+    const canvas = document.getElementById("visualizerCanvas");
+    const context = canvas.getContext("2d");
+    const analyser = new AnalyserNode(audioContext);
 
-  startMusicBtn.addEventListener("click", () => {
-    backgroundMusic.play();
-    startMusicBtn.style.display = "none";
-  });
-</script>
+    const audio = document.getElementById("backgroundMusic");
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioContext.createMediaElementSource(audio);
+
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    function visualize() {
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      analyser.getByteFrequencyData(dataArray);
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = canvas.width / bufferLength;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i] * 0.5;
+
+        context.fillStyle = `rgb(${barHeight + 100}, 50, 50)`;
+        context.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+
+        x += barWidth + 1;
+      }
+
+      requestAnimationFrame(visualize);
+    }
+
+    // Start visualizing when music starts playing
+    audio.addEventListener("play", () => {
+      visualize();
+    });
+  </script>
+</body>
+</html>
