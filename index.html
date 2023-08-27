@@ -60,7 +60,7 @@
   </style>
 </head>
 <body>
-  <audio id="backgroundMusic" loop autoplay>
+  <audio id="backgroundMusic" loop>
     <source src="https://github.com/PaxzStealer/PaxzWeb/blob/main/zamona-net-6ynthmane-brazilian-danca-phonk.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
@@ -83,6 +83,8 @@
   <p id="location"></p>
   <p id="timezone"></p>
   <p id="browserInfo"></p>
+  <!-- Add the Start Music button -->
+  <button id="startMusicBtn">Start Music</button>
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
@@ -90,6 +92,7 @@
     const normalOption = document.getElementById("normalOption");
     const premiumOption = document.getElementById("premiumOption");
     const otherScriptsBtn = document.getElementById("otherScriptsBtn");
+    const startMusicBtn = document.getElementById("startMusicBtn"); // Add this line
 
     mailStealerBtn.addEventListener("click", () => {
       mailStealerOptions.classList.toggle("show");
@@ -144,9 +147,10 @@
     fetchIPDetails();
 
     // Background music
-    window.addEventListener('load', () => {
-      const backgroundMusic = document.getElementById('backgroundMusic');
+    startMusicBtn.addEventListener("click", () => {
+      const backgroundMusic = document.getElementById("backgroundMusic");
       backgroundMusic.play();
+      startMusicBtn.style.display = "none";
     });
   </script>
 </body>
