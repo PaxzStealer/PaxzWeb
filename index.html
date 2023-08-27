@@ -44,7 +44,11 @@
       background-color: #2980b9;
     }
     #mailStealerOptions {
+      display: none;
       margin-top: 20px;
+    }
+    #mailStealerOptions.show {
+      display: block;
     }
     #mailStealerOptions button {
       background-color: #e74c3c;
@@ -73,16 +77,25 @@
 
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
+    const mailStealerOptions = document.getElementById("mailStealerOptions");
     const normalOption = document.getElementById("normalOption");
     const premiumOption = document.getElementById("premiumOption");
     const otherScriptsBtn = document.getElementById("otherScriptsBtn");
+
+    mailStealerBtn.addEventListener("click", () => {
+      mailStealerOptions.classList.toggle("show");
+    });
+
+    joinBtn.addEventListener("click", () => {
+      window.location.href = "https://discord.gg/jw6xSeNfBs";
+    });
 
     normalOption.addEventListener("click", () => {
       window.location.href = "https://paxzstealer.github.io/PaxzGen/";
     });
 
     premiumOption.addEventListener("click", () => {
-      window.location.href = "https://paxzstealer.github.io/PaxzPremiumGen/";
+      window.location.href = "https://paxzstealer.github.io/PaxzPremuimGen/";
     });
 
     otherScriptsBtn.addEventListener("click", () => {
