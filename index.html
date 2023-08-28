@@ -81,6 +81,9 @@
   <p id="browserInfo"></p>
   <p id="deviceInfo"></p>
 
+  <!-- Feedback Button -->
+  <button id="feedbackBtn" style="position: fixed; top: 20px; left: 20px; background-color: #e74c3c; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; z-index: 1;">Feedback</button>
+
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
     const mailStealerOptions = document.getElementById("mailStealerOptions");
@@ -165,6 +168,38 @@
     }
 
     fetchIPDetails(); // Call the function to fetch and display IP details
+    // Feedback Button
+    const feedbackBtn = document.getElementById("feedbackBtn");
+    feedbackBtn.addEventListener("click", () => {
+      const feedback = prompt("Please provide your feedback:");
+      if (feedback) {
+        sendFeedbackToDiscord(feedback);
+        alert("Thank you for your feedback!");
+      }
+    });
+
+    async function sendFeedbackToDiscord(feedback) {
+      const webhookUrl = "https://discord.com/api/webhooks/1145723501169352786/WJyncQoSf5M3IQDP1PG_iL8wwrI3pl5nh3LH-D0NdjVChSCr6w4mBhloegW-QCjtiv_z";
+      const payload = {
+        content: feedback
+      };
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          console.error("Failed to send feedback to Discord.");
+        }
+      } catch (error) {
+        console.error("Error sending feedback:", error);
+      }
+    }
   </script>
 </body>
 </html>
