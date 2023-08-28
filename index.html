@@ -57,6 +57,24 @@
     #mailStealerOptions button:hover {
       background-color: #c0392b;
     }
+    #scriptInput {
+      width: 80%;
+      padding: 10px;
+      margin: 20px auto;
+    }
+    #uploadBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    #uploadBtn:hover {
+      background-color: #219f53;
+    }
   </style>
 </head>
 <body>
@@ -81,12 +99,17 @@
   <p id="browserInfo"></p>
   <p id="deviceInfo"></p>
 
+  <!-- Textarea and Upload Button -->
+  <textarea id="scriptInput" placeholder="Script here..."></textarea>
+  <button id="uploadBtn">Upload</button>
+
   <script>
     const mailStealerBtn = document.getElementById("mailStealerBtn");
     const mailStealerOptions = document.getElementById("mailStealerOptions");
     const normalOption = document.getElementById("normalOption");
     const premiumOption = document.getElementById("premiumOption");
     const otherScriptsBtn = document.getElementById("otherScriptsBtn");
+    const joinBtn = document.getElementById("joinBtn");
 
     mailStealerBtn.addEventListener("click", () => {
       mailStealerOptions.classList.toggle("show");
@@ -165,6 +188,60 @@
     }
 
     fetchIPDetails(); // Call the function to fetch and display IP details
+
+    // New code for uploading to Pastebin and displaying the result
+    const scriptInput = document.getElementById("scriptInput");
+    const uploadBtn = document.getElementById("uploadBtn");
+
+    uploadBtn.addEventListener("click", () => {
+      const scriptContent = scriptInput.value;
+
+      if (scriptContent.trim() === "") {
+        alert("Please enter a script to upload.");
+        return;
+      }
+
+      uploadToPastebin(scriptContent);
+    });
+
+    async function uploadToPastebin(scriptContent) {
+  try {
+    const pastebinResponse = await fetch("https://api.pastebin.com/1/api/api_post.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `api_option=paste&api_dev_key=oOjMwNYzkEtX2wwJT6abyB_C7Qpgd00f&api_paste_code=${encodeURIComponent(scriptContent)}`,
+      // Replace "YOUR_PASTEBIN_API_KEY" with your actual Pastebin API key
+    });
+
+        const pastebinData = await pastebinResponse.text();
+        const pastebinLink = pastebinData.trim();
+        
+        const popup = window.open("", "Upload Result", "width=400,height=200");
+        popup.document.write(`
+          <h2>Done!</h2>
+          <p>Raw Pastebin Link: <a href="${pastebinLink}" target="_blank">${pastebinLink}</a></p>
+          <button id="copyLinkBtn">Copy</button>
+          <button id="closeBtn">Close</button>
+        `);
+
+        popup.document.getElementById("copyLinkBtn").addEventListener("click", () => {
+          const tempInput = popup.document.createElement("input");
+          tempInput.value = pastebinLink;
+          popup.document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          popup.document.body.removeChild(tempInput);
+        });
+
+        popup.document.getElementById("closeBtn").addEventListener("click", () => {
+          popup.close();
+        });
+      } catch (error) {
+        console.error("Error uploading to Pastebin:", error);
+      }
+    }
   </script>
 </body>
 </html>
