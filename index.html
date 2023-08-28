@@ -206,7 +206,7 @@
 
     async function uploadToPastebin(scriptContent) {
   try {
-    const pastebinResponse = await fetch("https://api.pastebin.com/1/api/api_post.php", {
+    const pastebinResponse = await fetch("https://pastebin.com/api/api_post.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
